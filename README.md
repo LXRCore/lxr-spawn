@@ -17,6 +17,9 @@ After `lxr-multicharacter` loads a character it fires
 for the allowed options, lets the player pick one with a fly-over camera and
 performs the teleport the **server** ordered.
 
+![The spawn picker](docs/img/spawn.png)
+
+
 ## Why v2
 
 | v1 | v2 |
