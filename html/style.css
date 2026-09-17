@@ -1,111 +1,117 @@
-.container {
-    font-family: 'Monospace', Serif;
+/* ═══════════════════════════════════════════════════════════════════════════
+   🐺 LXR-SPAWN — NUI stylesheet (LXRCore design tokens)
+   Vanilla CSS, CEF-safe (no nesting, no color-mix, no oklab).
+   © 2026 iBoss21 / LXRCore | lxrcore.com | All Rights Reserved
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --lxr-font-sans: system-ui, "Segoe UI", "Sylfaen", "DejaVu Sans", Tahoma, Arial, sans-serif;
+    --bg: #100e0c;
+    --surface: #1a1512;
+    --card: #221c17;
+    --text: #ebe3d4;
+    --muted: rgba(200, 185, 165, .72);
+    --accent: #c4a574;
+    --danger: #a83a3a;
+    --ok: #6f9a5a;
+    --panel-side-gap: 44px;
+    --panel-max-w: min(1400px, calc(100vw - 88px));
+    --panel-max-h: min(920px, calc(100vh - 32px));
+    --lxr-scroll-size: 5px;
+    --lxr-scroll-thumb: rgba(196, 165, 116, .38);
+    --cfg-r: 12px;
+    --cfg-r-sm: 8px;
+    --cfg-edge: rgba(196, 165, 116, .18);
+    --img-lxrcore-logo: url("img/lxrcore-logo.png");
 }
-.spawn-locations {
-   text-transform: uppercase;
-   position: absolute;
-   min-width: 30vh;
-   width: 80vh;
-   max-width: 100vh;
-   top: 13vh;
-   left: 50vh;
-   background-color: #00000080;
-   box-shadow: rgb(0 0 0) 0px 3px 6px, rgb(0 0 0) 0px 3px 6px;
-   padding: 30px;
-   cursor: default;
-   transition: all 300ms ease 0s;
-   border-radius: 0px;
-   color: #c53131;
-   border: 1px solid #dc143cd1;
+
+* { box-sizing: border-box; font-family: var(--lxr-font-sans); }
+body { margin: 0; background: transparent; color: var(--text); overflow: hidden; }
+.hidden { display: none !important; }
+
+#app {
+    position: fixed; inset: 0; background: transparent;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding: 16px var(--panel-side-gap); gap: 24px;
 }
-.spawn-information {
-    text-transform: uppercase;
-    position: absolute;
-    min-width: 80.1vh;
-    width: 30vh;
-    max-width: 100vh;
-    top: 68vh;
-    left: 50vh;
-    background-color: rgba(22, 25, 35, 0.95);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    padding: 39px;
-    cursor: default;
-    transition: all 300ms ease 0s;
-    border-radius: 0px;
-    color: white;
-    border: 2px solid rgba(245, 245, 245, 0.81);
+
+/* ── panels ─────────────────────────────────────────────────────────────── */
+.lxr-panel {
+    background: rgba(16, 14, 12, .88);
+    border: 1px solid var(--cfg-edge);
+    border-radius: var(--cfg-r);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, .9);
+    display: flex; flex-direction: column;
+    max-height: var(--panel-max-h);
 }
-.spawn-information-header > p {
-    font-family: 'Monospace', Serif;
-    letter-spacing: 1px;
-    font-weight: bold;
-    position: relative;
-    color: rgb(237, 237, 237);
-    text-align: center;
-    font-size: 1.5vh;
+.lxr-panel { width: 420px; height: var(--panel-max-h); }
+.lxr-panel__head { padding: 20px 24px 8px; }
+.lxr-panel__foot { padding: 16px 24px 20px; border-top: 1px solid var(--cfg-edge); }
+
+/* ── banner ─────────────────────────────────────────────────────────────── */
+.lxr-banner {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 24px; border-bottom: 1px solid var(--cfg-edge);
+    background: linear-gradient(180deg, rgba(196, 165, 116, .08), transparent);
 }
-.location {
-    width: 100%;
-    margin-bottom: 15px;
-    transition: all 200ms ease 0s;
-    border-radius: 0.3vh;
-    cursor: pointer;
+.lxr-banner__avatar-wrap {
+    width: 52px; height: 52px; border-radius: 10px; flex: 0 0 auto;
+    background: #17171b; border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-.location > p {
-    position: relative;
-    color: rgb(237, 237, 237);
-    text-align: center;
-    line-height: 4.5vh;
-    font-size: 1.8vh;
+.lxr-banner__avatar { width: 44px; height: 44px; object-fit: contain; }
+.lxr-banner__title { font-size: 18px; font-weight: 700; letter-spacing: .02em; }
+.lxr-banner__sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── typography ─────────────────────────────────────────────────────────── */
+.lxr-title { margin: 0; font-size: 22px; font-weight: 700; color: var(--text); }
+.lxr-title--lg { font-size: 26px; margin-bottom: 16px; }
+.lxr-muted { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.lxr-slots { margin: 10px 0 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.lxr-lead { font-size: 15px; line-height: 1.5; margin: 0 0 18px; }
+.lxr-error { color: #e08a8a; font-size: 13px; margin: 8px 0 0; }
+
+/* ── list ───────────────────────────────────────────────────────────────── */
+.lxr-list { list-style: none; margin: 0; padding: 8px 16px 8px 24px; overflow-y: auto; flex: 1 1 auto; }
+.lxr-list li { margin: 0 0 10px; }
+.lxr-card {
+    width: 100%; text-align: left; cursor: pointer;
+    background: var(--card); color: var(--text);
+    border: 1px solid var(--cfg-edge); border-radius: var(--cfg-r-sm);
+    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
+    transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
 }
-.v-btn.location:hover {
-    transition: all 300ms ease 0s;
-    background-color: rgba(67, 67, 67, 0.647) !important;
+.lxr-card:hover { border-color: var(--accent); transform: translateX(2px); }
+.lxr-card--active { border-color: var(--accent); background: rgba(196, 165, 116, .10); }
+.lxr-card--empty { border-style: dashed; color: var(--muted); justify-content: center; }
+.lxr-card__slot {
+    width: 34px; height: 34px; border-radius: 50%; flex: 0 0 auto;
+    border: 1px solid var(--accent); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
 }
-.selected {
-    background-color: rgb(220, 20, 60);
+.lxr-card__name { font-size: 16px; font-weight: 600; }
+.lxr-card__meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── buttons ───────────────────────────────────────────────────────────── */
+.cfg-btn {
+    appearance: none; cursor: pointer; font-size: 14px; font-weight: 600;
+    padding: 12px 18px; border-radius: var(--cfg-r-sm);
+    border: 1px solid var(--cfg-edge); background: var(--surface); color: var(--text);
+    transition: background 160ms ease, border-color 160ms ease, transform 120ms ease;
 }
-.submit-spawn {
-    width: 100%;
-    margin-top: 1.5vh;
-    transition: all 0.2s ease 0s;
-    cursor: pointer;
-    border-radius: 6px;
-    color: white;
-    border: 2px solid #00000080;
-    background-color: rgb(2 66 17) !important;
-}
-.submit-spawn > p {
-    position: relative;
-    color: white;
-    text-align: center;
-    line-height: 4.5vh;
-    font-size: 1.6vh;
-    font-family: 'Monospace', Serif;
-    letter-spacing: 1px;
-    font-weight: bold;
-}
-.submit-spawn:hover {
-    transition: all 0.2s ease 0s;
-}
-#spawn-label {
-    color: rgb(237, 237, 237);
-    font-weight: bold;
-}
-.loclabel {
-    width: auto;
-    height: 4vh;
-    transition: all 0.2s ease 0s;
-}
-.loclabel > p {
-    font-family: 'Monospace', Serif;
-    letter-spacing: 1px;
-    font-weight: bold;
-    position: relative;
-    color: rgb(237, 237, 237);
-    text-align: center;
-    font-size: 1.5vh;
-}
-ul.b {
-    list-style-type: square;
+.cfg-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.cfg-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.cfg-btn--primary { background: var(--accent); color: #1a1512; border-color: var(--accent); }
+.cfg-btn--primary:hover { background: #d4b584; }
+.cfg-btn--block { width: 100%; }
+.lxr-card__kind { margin-left: auto; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+
+/* ── scrollbar ──────────────────────────────────────────────────────────── */
+.lxr-scroll-minimal::-webkit-scrollbar { width: var(--lxr-scroll-size); }
+.lxr-scroll-minimal::-webkit-scrollbar-thumb { background: var(--lxr-scroll-thumb); border-radius: 4px; }
+.lxr-scroll-minimal::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 900px) {
+    #app { padding: 16px; }
+    .lxr-panel { width: 100%; height: auto; max-height: 70vh; }
 }
