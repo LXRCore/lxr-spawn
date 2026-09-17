@@ -60,6 +60,7 @@
     });
 
     window.addEventListener('message', (event) => {
+        { const m = event.data || {}; const th = m.theme || (m.brand && m.brand.theme) || (m.server && m.server.theme); if (th) document.documentElement.dataset.theme = th; }
         const data = event.data || {};
         if (data.action === 'open') {
             locale = data.locale || {};
