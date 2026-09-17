@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-    🐺 LXR-SPAWN — Spawn selection NUI
+    LXR-SPAWN — Spawn selection NUI
     Vanilla HTML/CSS/JS · LXRCore design tokens · Georgian-safe font stack · no CDN
     © 2026 iBoss21 / LXRCore | lxrcore.com | All Rights Reserved
 -->
@@ -9,11 +9,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LXR Spawn</title>
+    <link rel="stylesheet" href="lxr-ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="lxr">
 <div id="app" class="hidden">
-    <aside class="lxr-panel">
+    <aside class="lxr-hit lxr-panel">
         <header class="lxr-banner">
             <div class="lxr-banner__avatar-wrap">
                 <img id="brand-logo" class="lxr-banner__avatar" src="img/lxrcore-logo.png" alt="LXRCore">
@@ -23,12 +24,12 @@
                 <div id="server-tagline" class="lxr-banner__sub"></div>
             </div>
         </header>
-        <div class="lxr-panel__head">
+        <div class="lxr-hit lxr-panel__head">
             <h1 id="t-title" class="lxr-title">Where do you ride from?</h1>
             <p id="t-subtitle" class="lxr-muted">Pick a place to begin</p>
         </div>
         <ul id="options" class="lxr-list lxr-scroll-minimal"></ul>
-        <footer class="lxr-panel__foot">
+        <footer class="lxr-hit lxr-panel__foot">
             <button id="btn-spawn" class="cfg-btn cfg-btn--primary cfg-btn--block" disabled>Ride out</button>
         </footer>
     </aside>
