@@ -1,10 +1,12 @@
 <!--
-    🐺 lxr-spawn — LXRCore spawn selection
+    lxr-spawn — LXRCore spawn selection
     Developer: iBoss21 / LXRCore · https://www.lxrcore.com
     © 2026 iBoss21 / LXRCore | lxrcore.com | All Rights Reserved
 -->
 
-# 🐺 lxr-spawn — Spawn selection for LXRCore v3
+<img src="https://raw.githubusercontent.com/LXRCore/.github/main/profile/lxrcore-logo.png" alt="LXRCore" width="72" align="left" style="margin-right:12px">
+
+# lxr-spawn — Spawn selection for LXRCore v3
 
 ![Version](https://img.shields.io/badge/version-2.0.0-c4a574)
 ![Core](https://img.shields.io/badge/requires-lxr--core_v3-1a1512)
