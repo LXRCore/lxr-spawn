@@ -70,7 +70,7 @@ LXRCore.Callback.Register('lxr-spawn:server:options', function(src, isNew)
     if not Player then return nil end
     local list, map = buildOptions(Player, isNew == true)
     pending[src] = { isNew = isNew == true, options = map }
-    return { options = list, isNew = isNew == true, locale = Lang.bundle(), server = Config.ServerInfo, skipSingle = Config.General.skipUIWhenSingle }
+    return { options = list, isNew = isNew == true, locale = Lang.bundle(), server = LXRCore.Brand, skipSingle = Config.General.skipUIWhenSingle }
 end)
 
 RegisterNetEvent('lxr-spawn:server:choose', function(id)
