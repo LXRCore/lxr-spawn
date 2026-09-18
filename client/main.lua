@@ -59,7 +59,7 @@ local function openUI(payload)
     SetEntityVisible(ped, false, false)
     FreezeEntityPosition(ped, true)
     SetNuiFocus(true, true)
-    SendNUIMessage({ action = 'open', options = payload.options, isNew = payload.isNew, locale = payload.locale, server = payload.server })
+    SendNUIMessage({ action = 'open', options = payload.options, isNew = payload.isNew, locale = payload.locale, server = payload.server, brand = LXRCore.Brand, lang = Config.Lang })
     controlLock()
     local first = payload.options[1]
     if first and first.coords then flyTo(first.coords) end

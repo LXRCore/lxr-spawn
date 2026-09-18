@@ -1,39 +1,28 @@
-<!doctype html>
-<!--
-    LXR-SPAWN — Spawn selection NUI
-    Vanilla HTML/CSS/JS · LXRCore design tokens · Georgian-safe font stack · no CDN
-    © 2026 iBoss21 / LXRCore | lxrcore.com | All Rights Reserved
--->
+<!DOCTYPE html>
+<!-- LXR-SPAWN | LXR UI Kit | © 2026 iBoss21 / LXRCore | lxrcore.com -->
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LXR Spawn</title>
-    <link rel="stylesheet" href="lxr-ui.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>Ride out</title>
+  <link rel="stylesheet" href="lxr-ui.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="lxr">
-<div id="app" class="hidden">
-    <aside class="lxr-hit lxr-panel">
-        <header class="lxr-banner">
-            <div class="lxr-banner__avatar-wrap">
-                <img id="brand-logo" class="lxr-banner__avatar" src="img/lxrcore-logo.png" alt="LXRCore">
-            </div>
-            <div class="lxr-banner__text">
-                <div id="server-name" class="lxr-banner__title">LXRCore</div>
-                <div id="server-tagline" class="lxr-banner__sub"></div>
-            </div>
-        </header>
-        <div class="lxr-hit lxr-panel__head">
-            <h1 id="t-title" class="lxr-title">Where do you ride from?</h1>
-            <p id="t-subtitle" class="lxr-muted">Pick a place to begin</p>
-        </div>
-        <ul id="options" class="lxr-list lxr-scroll-minimal"></ul>
-        <footer class="lxr-hit lxr-panel__foot">
-            <button id="btn-spawn" class="cfg-btn cfg-btn--primary cfg-btn--block" disabled>Ride out</button>
-        </footer>
+  <div id="app" class="lxr-hidden">
+    <header class="sp-top lxr-hit">
+      <div class="sp-brand">
+        <img class="sp-logo" src="img/lxrcore-logo.png" alt="">
+        <div><span class="lxr-mono lxr-t-ash" id="server-name"></span><h1 class="lxr-cut sp-title" id="t-title"></h1></div>
+      </div>
+      <div class="sp-hints lxr-mono lxr-t-smoke"><span class="lxr-key">↑ ↓</span><span data-l="hint_pick"></span><span class="lxr-key">Enter</span><span data-l="hint_go"></span></div>
+    </header>
+
+    <aside class="sp-panel lxr-hit">
+      <div class="sp-panel__head lxr-rule-b"><span class="lxr-mono lxr-t-ash" id="t-subtitle"></span><span class="lxr-grow"></span><span class="lxr-mono lxr-t-smoke" id="count"></span></div>
+      <div class="sp-rows" id="options"></div>
+      <footer class="sp-panel__foot"><button class="lxr-btn sp-go" id="btn-spawn" disabled></button></footer>
     </aside>
-</div>
-<script src="app.js"></script>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>

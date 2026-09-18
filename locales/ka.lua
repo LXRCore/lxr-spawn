@@ -6,6 +6,11 @@
 
 Locale.Register('ka', {
     ui = {
+        hint_pick     = 'არჩევა',
+        hint_go       = 'გზას დაადექი',
+        kind_last     = 'სადაც იყავი',
+        kind_random   = 'ღია ველი',
+        kind_town     = 'ქალაქი',
         title         = 'საიდან გაუდგები გზას?',
         subtitle      = 'აირჩიე დასაწყისის ადგილი',
         last_position = 'სადაც შეჩერდი',
