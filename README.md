@@ -8,7 +8,7 @@
 
 # lxr-spawn — Spawn selection for LXRCore v3
 
-![Version](https://img.shields.io/badge/version-3.0.0-c21c37)
+![Version](https://img.shields.io/badge/version-3.1.0-c21c37)
 ![Core](https://img.shields.io/badge/requires-lxr--core_v3-1a1512)
 ![NUI](https://img.shields.io/badge/NUI-vanilla_%C2%B7_no_CDN-brightgreen)
 
@@ -17,24 +17,36 @@ After `lxr-creator` selects or creates a character it fires
 for the allowed options, lets the player pick one with a fly-over camera and
 performs the teleport the **server** ordered.
 
-![The spawn picker](docs/img/spawn.png)
+![The spawn picker — where you left off](docs/img/spawn.png)
 
+![A town card](docs/img/spawn-town.png)
 
-## Why v2
+## What the player gets
 
-| v1 | v2 |
-|---|---|
-| NUI sent coordinates the client chose | client sends an **id**; the server resolves it from `Config.Spawns` / `Config.FirstSpawns` / last position and rejects anything else |
-| jQuery from a CDN | vanilla HTML/CSS/JS, LXRCore design tokens |
-| FiveM apartment / house hooks | removed; `jobs` restriction per spawn point instead |
-| control-lock loop always running | loop only while the UI is open |
+* **Where you left off** — with when they were last seen and how far from the
+  nearest town (`last_updated` on the players row; nothing else is stored).
+* **Towns** in label order, each with its region under the name and a card on
+  the right: a line about the place and what is in town (doctor, law, store,
+  train, stable, bank, post, saloon). Points can be restricted to jobs.
+* **Somewhere out there** — the server picks; the client never learns the
+  coordinates of anything it did not choose.
+* **Arrival protection** — untouchable for `Config.Protection.seconds` after
+  the teleport, with a toast before it ends, so nobody camps a spawn.
+* Fly-over camera on hover, arrow keys + Enter, both kit themes, EN / KA.
+
+## How it stays honest
+
+The NUI sends an **id**; the server resolves it from `Config.Spawns` /
+`Config.FirstSpawns` / the saved position and rejects anything else
+(`LXRCore.Log.exploit`). Controls are locked only while the picker is open.
 
 ## Config
 
-`Config.Spawns` (existing characters), `Config.FirstSpawns` (new
-characters), `Config.General.allowLastPosition / allowRandom /
-skipUIWhenSingle / newCharacterEvent`, camera heights. Optional `jobs = { 'vallaw' }`
-on a spawn point restricts it.
+`Config.Spawns` (existing characters) and `Config.FirstSpawns` (new characters):
+`label`, `region`, `coords`, `services = { … }`, optional `jobs = { 'vallaw' }`.
+The card's line about each place is `place.<id>` in `locales/`.
+`Config.General.allowLastPosition / allowRandom / skipUIWhenSingle / lastSeen /
+newCharacterEvent`, `Config.Protection.seconds / warnAt`, camera heights.
 
 ## Events
 
@@ -48,9 +60,5 @@ on a spawn point restricts it.
 
 After the teleport the client fires `LXRCore:Server:OnPlayerLoaded` and
 `LXRCore:Client:OnPlayerLoaded` (the framework's spawn signal).
-
-## Verification
-
-Lua / JS syntax ✅ · in-game flow **NOT TESTED** yet.
 
 > © 2026 iBoss21 / LXRCore | [lxrcore.com](https://www.lxrcore.com) | All Rights Reserved

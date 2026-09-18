@@ -42,13 +42,14 @@ lua54 'yes'
 name 'lxr-spawn'
 author 'iBoss21 / LXRCore'
 description 'LXRCore v3 spawn selection'
-version '3.0.0'
+version '3.1.0'
 repository 'https://github.com/LXRCore/lxr-spawn'
 
 shared_scripts {
     'shared/locale.lua',
     'locales/*.lua',
     'config.lua',
+    'shared/rules.lua',
 }
 
 client_script 'client/main.lua'

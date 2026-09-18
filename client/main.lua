@@ -66,6 +66,27 @@ local function openUI(payload)
     DoScreenFadeIn(Config.General.fadeMs)
 end
 
+-- arrival protection: untouchable for Config.Protection.seconds, with a warning before it ends
+local protectUntil = 0
+local function protect(ped)
+    local secs = Config.Protection.seconds or 0
+    if secs <= 0 then return end
+    protectUntil = GetGameTimer() + secs * 1000
+    SetEntityInvincible(ped, true)
+    LXRCore.Notify(Lang:t('info.protected', { s = secs }), 'info')
+    CreateThread(function()
+        local warned = false
+        while GetGameTimer() < protectUntil do
+            if not warned and protectUntil - GetGameTimer() <= (Config.Protection.warnAt or 0) * 1000 then
+                warned = true
+                LXRCore.Notify(Lang:t('info.protect_end'), 'info')
+            end
+            Wait(250)
+        end
+        SetEntityInvincible(PlayerPedId(), false)
+    end)
+end
+
 local function closeUI()
     ui.open = false
     SetNuiFocus(false, false)
@@ -105,6 +126,7 @@ RegisterNetEvent('lxr-spawn:client:spawnAt', function(coords, isNew)
         if isNew and Config.General.newCharacterEvent then
             TriggerEvent(Config.General.newCharacterEvent)
         end
+        protect(ped)
     end)
 end)
 

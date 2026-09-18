@@ -30,47 +30,53 @@ local function toCoords(v)
     return { x = v.x, y = v.y, z = v.z, w = v.w or 0.0 }
 end
 
+local function card(id, def)
+    local tags = {}
+    for _, svc in ipairs(def.services or {}) do tags[#tags + 1] = svc end
+    return { region = def.region, note = Lang:t('place.' .. id), services = tags }
+end
+
+-- "last seen": seconds since the row was saved and the nearest town; nil when the option is off
+local function lastSeen(pd)
+    if not Config.General.lastSeen then return nil end
+    local t = LXRCore.DB.Scalar('SELECT UNIX_TIMESTAMP(last_updated) FROM players WHERE citizenid = ?', { pd.citizenid })
+    local near, dist = LXRSpawn.Nearest(pd.position, Config.Spawns)
+    return {
+        since = t and math.max(0, os.time() - tonumber(t)) or nil,
+        near = near and Config.Spawns[near].label or nil,
+        miles = dist and LXRSpawn.Miles(dist) or nil,
+    }
+end
+
 local function buildOptions(Player, isNew)
     local pd = Player.PlayerData
     local list, map = {}, {}
     local pool = isNew and Config.FirstSpawns or Config.Spawns
-
     if not isNew and Config.General.allowLastPosition and pd.position and pd.position.x then
         map.last = toCoords(pd.position)
-        list[#list + 1] = { id = 'last', label = Lang:t('ui.last_position'), coords = map.last, kind = 'last' }
+        list[#list + 1] = { id = 'last', label = Lang:t('ui.last_position'), coords = map.last, kind = 'last', note = Lang:t('ui.last_note'), seen = lastSeen(pd) }
     end
-
-    local ordered = {}
-    for id, def in pairs(pool) do ordered[#ordered + 1] = { id = id, def = def } end
-    table.sort(ordered, function(a, b) return (a.def.label or a.id) < (b.def.label or b.id) end)
-    for _, entry in ipairs(ordered) do
-        local def = entry.def
-        local allowed = true
-        if def.jobs then
-            allowed = false
-            for _, job in ipairs(def.jobs) do if job == pd.job.name then allowed = true end end
-        end
-        if allowed then
-            map[entry.id] = toCoords(def.coords)
-            list[#list + 1] = { id = entry.id, label = def.label or entry.id, coords = map[entry.id], kind = 'town' }
+    for _, id in ipairs(LXRSpawn.Ordered(pool)) do
+        local def = pool[id]
+        if LXRSpawn.Allowed(def, pd.job.name) then
+            map[id] = toCoords(def.coords)
+            local c = card(id, def)
+            list[#list + 1] = { id = id, label = def.label or id, coords = map[id], kind = 'town', region = c.region, note = c.note, services = c.services }
         end
     end
-
-    if Config.General.allowRandom and #ordered > 0 then
-        list[#list + 1] = { id = 'random', label = Lang:t('ui.random'), kind = 'random' }
+    if Config.General.allowRandom and next(pool) then
+        list[#list + 1] = { id = 'random', label = Lang:t('ui.random'), kind = 'random', note = Lang:t('ui.random_note') }
         map.random = true
     end
     return list, map
 end
-
----Ask the loaded player to choose a spawn (called by lxr-creator through the client event).
 LXRCore.Callback.Register('lxr-spawn:server:options', function(src, isNew)
     if limited(src) then return nil end
     local Player = LXRCore.Functions.GetPlayer(src)
     if not Player then return nil end
     local list, map = buildOptions(Player, isNew == true)
     pending[src] = { isNew = isNew == true, options = map }
-    return { options = list, isNew = isNew == true, locale = Lang.bundle(), server = LXRCore.Brand, skipSingle = Config.General.skipUIWhenSingle }
+    return { options = list, isNew = isNew == true, locale = Lang.bundle(), server = LXRCore.Brand, skipSingle = Config.General.skipUIWhenSingle, protection = Config.Protection.seconds }
 end)
 
 RegisterNetEvent('lxr-spawn:server:choose', function(id)
