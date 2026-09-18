@@ -72,7 +72,7 @@ local function closeUI()
     SendNUIMessage({ action = 'close' })
 end
 
--- Entry point from lxr-multicharacter: (cData, isNew)
+-- Entry point from lxr-creator (Config.Integrations.afterSelect / afterCreate): (cData, isNew)
 RegisterNetEvent('lxr-spawn:client:setupSpawnUI', function(_, isNew)
     CreateThread(function()
         local payload = LXRCore.Callback.Await('lxr-spawn:server:options', isNew == true)

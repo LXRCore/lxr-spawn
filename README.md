@@ -12,7 +12,7 @@
 ![Core](https://img.shields.io/badge/requires-lxr--core_v3-1a1512)
 ![NUI](https://img.shields.io/badge/NUI-vanilla_%C2%B7_no_CDN-brightgreen)
 
-After `lxr-multicharacter` loads a character it fires
+After `lxr-creator` selects or creates a character it fires
 `lxr-spawn:client:setupSpawnUI(cData, isNew)`. This resource asks the server
 for the allowed options, lets the player pick one with a fly-over camera and
 performs the teleport the **server** ordered.

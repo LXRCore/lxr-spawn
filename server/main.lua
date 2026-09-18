@@ -63,7 +63,7 @@ local function buildOptions(Player, isNew)
     return list, map
 end
 
----Ask the loaded player to choose a spawn (called by multicharacter through the client event).
+---Ask the loaded player to choose a spawn (called by lxr-creator through the client event).
 LXRCore.Callback.Register('lxr-spawn:server:options', function(src, isNew)
     if limited(src) then return nil end
     local Player = LXRCore.Functions.GetPlayer(src)

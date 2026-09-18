@@ -48,7 +48,7 @@ Config.General = {
     allowRandom       = true,   -- Offer a random spawn (picked on the server)
     skipUIWhenSingle  = false,  -- true: if only one option exists spawn there immediately
     -- Client event fired after a NEW character spawned; nil = none.
-    -- With lxr-multicharacter + lxr-clothing the creator already ran before the spawn
+    -- With lxr-creator + lxr-clothing the appearance was already set before the spawn
     -- picker (Config.Integrations.newCharacterAppearance), so leave this nil.
     newCharacterEvent = nil,
     fadeMs            = 600,
