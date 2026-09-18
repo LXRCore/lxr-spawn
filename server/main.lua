@@ -112,6 +112,6 @@ AddEventHandler('playerDropped', function()
     buckets[source] = nil
 end)
 
-AddEventHandler('LXRCore:Server:OnPlayerUnload', function(src)
+AddEventHandler('lxr:player:unloaded', function(src)
     pending[src] = nil
 end)

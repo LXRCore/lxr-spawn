@@ -18,6 +18,7 @@
 ]]
 
 local LXRCore = exports['lxr-core']:GetCoreObject()
+local LXR = exports['lxr-core']:GetLXR()
 
 local ui = { open = false, cam = nil, cam2 = nil, options = {} }
 
@@ -119,8 +120,7 @@ RegisterNetEvent('lxr-spawn:client:spawnAt', function(coords, isNew)
         Wait(300)
         FreezeEntityPosition(ped, false)
         SetEntityVisible(ped, true, false)
-        TriggerServerEvent('LXRCore:Server:OnPlayerLoaded')
-        TriggerEvent('LXRCore:Client:OnPlayerLoaded')
+        LXR.Player.Spawned()   -- lxr:client:loaded here, lxr:player:spawned on the server
         Wait(400)
         DoScreenFadeIn(Config.General.fadeMs)
         if isNew and Config.General.newCharacterEvent then
