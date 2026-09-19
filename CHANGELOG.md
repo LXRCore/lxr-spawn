@@ -1,5 +1,8 @@
 # Changelog — lxr-spawn
 
+## 3.0.0 — 2026-09-19
+* LXRCore v3 release line: every resource ships as 3.0.0 from here (the entries below are the road to it).
+
 ## [3.1.0] — 2026-09-18
 - Place card: region, a line about the place (`place.<id>` in locales), what is in town as tags.
 - "Where you left off" shows when the character was last seen and the distance to the nearest town.
