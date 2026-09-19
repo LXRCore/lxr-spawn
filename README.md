@@ -6,6 +6,19 @@
 
 <img src="https://raw.githubusercontent.com/LXRCore/.github/main/profile/lxrcore-logo.png" alt="LXRCore" width="72" align="left" style="margin-right:12px">
 
+# lxr-spawn — folded into lxr-creator
+
+> **Retired on 2026-09-19.** The spawn step (towns with place cards, where you
+> left off with last-seen and distance, the open range, the fly-over camera and
+> arrival protection) is now the last page of
+> [lxr-creator](https://github.com/LXRCore/lxr-creator) 3.1 — `Config.Spawn`,
+> `shared/spawn.lua`, `server/spawn.lua`, `client/spawn.lua`. One page, one
+> resource, no hand-off event. Do not run both.
+
+The code below stays for reference only.
+
+---
+
 # lxr-spawn — Spawn selection for LXRCore v3
 
 ![Version](https://img.shields.io/badge/version-3.1.0-c21c37)
